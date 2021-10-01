@@ -1,0 +1,10 @@
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\bin\Debug\netstandard2.0\MLModel.zip
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\bin\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.deps.json
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\bin\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.dll
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\bin\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.pdb
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\obj\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.csprojAssemblyReference.cache
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\obj\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.AssemblyInfoInputs.cache
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\obj\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.AssemblyInfo.cs
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\obj\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.csproj.CoreCompileInputs.cache
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\obj\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.dll
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.Model\obj\Debug\netstandard2.0\StockPredictorML.ModelDeprecated.pdb

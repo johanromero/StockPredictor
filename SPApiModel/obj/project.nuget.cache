@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "/0oR/XZwVvTdSvp3SWxPJ/xGQeqJTWcF4ZDguKXQqMfAcHHQoGoPpK6SR2H9fJq7SA7LQPYJDw3OIO/HztGiww==",
+  "success": true,
+  "projectFilePath": "C:\\Maestría\\Tesis\\Repos\\StockPredictor\\SPApiModel\\SPApiCore.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Johan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,12 @@
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\bin\Debug\netcoreapp3.1\SPDataService.deps.json
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\bin\Debug\netcoreapp3.1\SPDataService.dll
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\bin\Debug\netcoreapp3.1\SPDataService.pdb
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.csprojAssemblyReference.cache
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.AssemblyInfoInputs.cache
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.AssemblyInfo.cs
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.csproj.CoreCompileInputs.cache
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.dll
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.pdb
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\bin\Debug\netcoreapp3.1\SPDomain.dll
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\bin\Debug\netcoreapp3.1\SPDomain.pdb
+C:\Maestría\Tesis\Repos\StockPredictor\SPData\obj\Debug\netcoreapp3.1\SPDataService.csproj.CopyComplete

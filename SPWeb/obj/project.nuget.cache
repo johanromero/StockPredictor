@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "16JVNxOP7YYxkVs0PTMGy5IOmNGZ9sk6bBRMGlXG5lVcecFrNhu3iyzqkq4vKXIMHIK9IUVzeO98AU8Hz+u7TQ==",
+  "success": true,
+  "projectFilePath": "C:\\Maestría\\Tesis\\Repos\\StockPredictor\\SPWeb\\SPWeb.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Johan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}
