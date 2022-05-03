@@ -26,7 +26,6 @@ C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\bin\Debug\ne
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\FastTreeNative.dll
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\bin\Debug\netcoreapp3.1\StockPredictorML.ModelDeprecated.dll
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\bin\Debug\netcoreapp3.1\StockPredictorML.ModelDeprecated.pdb
-C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.csprojAssemblyReference.cache
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.AssemblyInfoInputs.cache
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.AssemblyInfo.cs
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.csproj.CoreCompileInputs.cache
@@ -34,3 +33,5 @@ C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\ne
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.dll
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.pdb
 C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.genruntimeconfig.cache
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Maestría\Tesis\Repos\StockPredictor\StockPredictorML.ConsoleApp\obj\Debug\netcoreapp3.1\StockPredictorML.ConsoleApp.csprojAssemblyReference.cache

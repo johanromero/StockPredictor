@@ -1,5 +1,5 @@
 ﻿using Microsoft.ML;
-using SPDomain.DataModel;
+using SPTrainer.Models;
 using System;
 using System.IO;
 

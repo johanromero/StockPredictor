@@ -5,8 +5,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
-using SPDomain;
-using SPDomain.Persistent;
+using SPDAO.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace StockPredictor.Data
@@ -20,7 +19,7 @@ namespace StockPredictor.Data
 
         public static IConfiguration Configuration { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Prediction> Predictions { get; set; }
+        public DbSet<UserPrediction> UserPredictions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,7 +29,7 @@ namespace StockPredictor.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasKey(e => e.Id);
-            modelBuilder.Entity<Prediction>().HasKey(e => e.Id);
+            modelBuilder.Entity<UserPrediction>().HasKey(e => e.Id);
         }
     }
 }

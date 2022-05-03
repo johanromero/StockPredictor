@@ -8,8 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "SPTrainer/1.0.0": {
         "dependencies": {
-          "Microsoft.ML": "1.6.0",
-          "SPDataService": "1.0.0"
+          "Microsoft.ML": "1.6.0"
         },
         "runtime": {
           "SPTrainer.dll": {}
@@ -932,23 +931,6 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
-      },
-      "SPDataService/1.0.0": {
-        "dependencies": {
-          "Microsoft.ML": "1.6.0",
-          "SPDomain": "1.0.0"
-        },
-        "runtime": {
-          "SPDataService.dll": {}
-        }
-      },
-      "SPDomain/1.0.0": {
-        "dependencies": {
-          "Microsoft.ML": "1.6.0"
-        },
-        "runtime": {
-          "SPDomain.dll": {}
-        }
       }
     }
   },
@@ -1594,16 +1576,6 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
-    },
-    "SPDataService/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SPDomain/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

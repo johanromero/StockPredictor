@@ -4,5 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SPDAO\SPDAO.csproj" />
+    <ProjectReference Include="..\SPData\SPDataService.csproj" />
+    <ProjectReference Include="..\SPTrainer\SPTrainer.csproj" />
+  </ItemGroup>
+
 
 </Project>

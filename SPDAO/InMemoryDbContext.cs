@@ -2,14 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.InMemory;
-using SPDomain.Persistent;
+using SPDAO.Models;
 
-namespace SPDao
+namespace SPDAO
 {
     public class InMemoryDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Prediction> Predictions { get; set; }
+        public DbSet<UserPrediction> UserPredictions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,7 +19,7 @@ namespace SPDao
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasKey(e => e.Id);
-            modelBuilder.Entity<Prediction>().HasKey(e => e.Id);
+            modelBuilder.Entity<UserPrediction>().HasKey(e => e.Id);
         }
     }
 

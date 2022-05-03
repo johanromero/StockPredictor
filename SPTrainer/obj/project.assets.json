@@ -1551,33 +1551,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
-      },
-      "SPDataService/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "Microsoft.ML": "1.6.0",
-          "SPDomain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/SPDataService.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SPDataService.dll": {}
-        }
-      },
-      "SPDomain/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "Microsoft.ML": "1.6.0"
-        },
-        "compile": {
-          "bin/placeholder/SPDomain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SPDomain.dll": {}
-        }
       }
     }
   },
@@ -5470,22 +5443,11 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
-    },
-    "SPDataService/1.0.0": {
-      "type": "project",
-      "path": "../SPData/SPDataService.csproj",
-      "msbuildProject": "../SPData/SPDataService.csproj"
-    },
-    "SPDomain/1.0.0": {
-      "type": "project",
-      "path": "../SPDomain/SPDomain.csproj",
-      "msbuildProject": "../SPDomain/SPDomain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Microsoft.ML >= 1.6.0",
-      "SPDataService >= 1.0.0"
+      "Microsoft.ML >= 1.6.0"
     ]
   },
   "packageFolders": {
@@ -5513,16 +5475,13 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://sitecore.myget.org/F/sc-packages/api/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {
-            "C:\\Maestría\\Tesis\\Repos\\StockPredictor\\SPData\\SPDataService.csproj": {
-              "projectPath": "C:\\Maestría\\Tesis\\Repos\\StockPredictor\\SPData\\SPDataService.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -5555,7 +5514,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
       }
     }
   }

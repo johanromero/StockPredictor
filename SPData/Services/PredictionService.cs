@@ -4,10 +4,9 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Microsoft.ML;
-using SPDomain.DataModel;
-using SPDomain.Persistent;
+using SPTrainer.Models;
 
-namespace SPData.Services
+namespace SPDataService.Services
 {
     public static class PredictionService
     {
@@ -19,7 +18,7 @@ namespace SPData.Services
             var p = new Prediction();
             var rootLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             
-            p.OneDayPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneDayPred_model.zip")).Score;
+            p.OneDayPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../SPTrainer/PredictionModels/OneDayPred_model.zip")).Score;
 
             return p;
         }

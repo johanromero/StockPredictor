@@ -1,12 +1,10 @@
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\bin\Debug\netcoreapp3.1\SPDAO.deps.json
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\bin\Debug\netcoreapp3.1\SPDAO.dll
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\bin\Debug\netcoreapp3.1\SPDAO.pdb
-C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\bin\Debug\netcoreapp3.1\SPDomain.dll
-C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\bin\Debug\netcoreapp3.1\SPDomain.pdb
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.csprojAssemblyReference.cache
+C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.GeneratedMSBuildEditorConfig.editorconfig
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.AssemblyInfoInputs.cache
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.AssemblyInfo.cs
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.csproj.CoreCompileInputs.cache
-C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.csproj.CopyComplete
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.dll
 C:\Maestría\Tesis\Repos\StockPredictor\SPDAO\obj\Debug\netcoreapp3.1\SPDAO.pdb

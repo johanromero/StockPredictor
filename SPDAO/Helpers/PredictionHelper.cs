@@ -1,5 +1,4 @@
-﻿using SPDao;
-using SPDomain.Persistent;
+﻿using SPDAO.Models;
 using StockPredictor.Data;
 using System;
 using System.Collections.Generic;
@@ -11,50 +10,50 @@ using System.Linq;
 
 namespace SPDAO.Helpers
 {
-    public class PredictionHelper
+    public class UserPredictionHelper
     {
         public StockPredictorDbContext ExtContext { get; set; }
         public InMemoryDbContext IntContext { get; set; }
 
-        public PredictionHelper()
+        public UserPredictionHelper()
         {
             ExtContext = new StockPredictorDbContext(StockPredictorDbContext.Configuration);
             IntContext = null;
         }
 
-        public PredictionHelper(InMemoryDbContext context)
+        public UserPredictionHelper(InMemoryDbContext context)
         {
             IntContext = context;
             ExtContext = null;
         }
 
-        public Prediction GetPredictionByTicker(string ticker)
+        public UserPrediction GetUserPredictionByTicker(string ticker)
         {
             if (ExtContext != null && IntContext == null)
             {
-                return ExtContext.Predictions.LastOrDefault(m => m.Ticker == ticker);
+                return ExtContext.UserPredictions.LastOrDefault(m => m.Ticker == ticker);
             }
             else
             {
-                return IntContext.Predictions.LastOrDefault(m => m.Ticker == ticker);
+                return IntContext.UserPredictions.LastOrDefault(m => m.Ticker == ticker);
             }
         }
 
-        public bool SetPrediction(
-            Prediction prediction, string username)
+        public bool SetUserPrediction(
+            UserPrediction UserPrediction, string username)
         {
-            prediction.CreationDate = DateTime.Now;
+            UserPrediction.CreationDate = DateTime.Now;
 
             if (ExtContext != null && IntContext == null)
             {
                 UserHelper uh = new UserHelper();
 
                 var usr = uh.GetUserByUsername(username);
-                prediction.User = usr;
-                var e = ExtContext.Entry<Prediction>(prediction).Entity;
+                UserPrediction.User = usr;
+                var e = ExtContext.Entry<UserPrediction>(UserPrediction).Entity;
 
                 e.User = usr;
-                ExtContext.Predictions.Attach(e).State = EntityState.Added;
+                ExtContext.UserPredictions.Attach(e).State = EntityState.Added;
 
                 return ExtContext.SaveChanges() > 0;
             }
@@ -63,30 +62,30 @@ namespace SPDAO.Helpers
                 var uh = new UserHelper(new InMemoryDbContext());
 
                 var us = uh.GetUserByUsername(username);
-                prediction.User = us;
+                UserPrediction.User = us;
 
-                var e = IntContext.Entry<Prediction>(prediction).Entity;
+                var e = IntContext.Entry<UserPrediction>(UserPrediction).Entity;
 
                 e.User = us;
-                IntContext.Predictions.Attach(e).State = EntityState.Added;
+                IntContext.UserPredictions.Attach(e).State = EntityState.Added;
                 return IntContext.SaveChanges() > 0;
             }
         }
 
-        public bool SetAnonymousPrediction(Prediction prediction)
+        public bool SetAnonymousUserPrediction(UserPrediction UserPrediction)
         {
-            return SetPrediction(prediction, "anonymous");
+            return SetUserPrediction(UserPrediction, "anonymous");
         }
 
-        public List<Prediction> GetPredictions()
+        public List<UserPrediction> GetUserPredictions()
         {
             if (ExtContext != null && IntContext == null)
             {
-                return ExtContext.Predictions.ToList();
+                return ExtContext.UserPredictions.ToList();
             }
             else
             {
-                return IntContext.Predictions.ToList();
+                return IntContext.UserPredictions.ToList();
             }
         }
     }

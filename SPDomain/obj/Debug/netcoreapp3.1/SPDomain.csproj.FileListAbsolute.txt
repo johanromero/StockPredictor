@@ -6,3 +6,5 @@ C:\Maestría\Tesis\Repos\StockPredictor\SPDomain\obj\Debug\netcoreapp3.1\SPDomai
 C:\Maestría\Tesis\Repos\StockPredictor\SPDomain\obj\Debug\netcoreapp3.1\SPDomain.csproj.CoreCompileInputs.cache
 C:\Maestría\Tesis\Repos\StockPredictor\SPDomain\obj\Debug\netcoreapp3.1\SPDomain.dll
 C:\Maestría\Tesis\Repos\StockPredictor\SPDomain\obj\Debug\netcoreapp3.1\SPDomain.pdb
+C:\Maestría\Tesis\Repos\StockPredictor\SPDomain\obj\Debug\netcoreapp3.1\SPDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Maestría\Tesis\Repos\StockPredictor\SPDomain\obj\Debug\netcoreapp3.1\SPDomain.csprojAssemblyReference.cache

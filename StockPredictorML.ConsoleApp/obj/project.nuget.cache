@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "12opI4t2b4Z2qN8UO7x386XvpN4J4uMtSrZbC9eQmipcuK+O6taYQHlEJpzmoU03EEZ6gy8USn+rQQa1bmgHZA==",
+  "dgSpecHash": "6w0HIXgtX+MGjv0YqgpUFFdIyNGuLlOT1C7MsSRHY4S8l5Qc5evQ298+eEdPbT/HASNPmfpUu386a+GflTJlsA==",
   "success": true,
   "projectFilePath": "C:\\Maestría\\Tesis\\Repos\\StockPredictor\\StockPredictorML.ConsoleApp\\StockPredictorML.ConsoleApp.csproj",
   "expectedPackageFiles": [
@@ -95,8 +95,7 @@
     "C:\\Users\\Johan\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\Johan\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Johan\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Johan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

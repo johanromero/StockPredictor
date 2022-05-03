@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SPDao;
-using SPDomain.Persistent;
+using SPDAO.Models;
 using StockPredictor.Data;
 using System;
 using System.Collections.Generic;
@@ -61,21 +60,21 @@ namespace SPDAO.Helpers
             }
         }
 
-        public List<Prediction> GetUserPredictions(string username)
+        public List<UserPrediction> GetUserUserPredictions(string username)
         {
             if (ExtContext != null && IntContext == null)
             {
-                return ExtContext.Predictions.Where(m => m.User.Username == username).ToList();
+                return ExtContext.UserPredictions.Where(m => m.User.Username == username).ToList();
             }
             else
             {
-                return IntContext.Predictions.Where(m => m.User.Username == username).ToList();
+                return IntContext.UserPredictions.Where(m => m.User.Username == username).ToList();
             }
         }
 
-        public List<Prediction> GetAnonymousPredictions()
+        public List<UserPrediction> GetAnonymousUserPredictions()
         {
-            return GetUserPredictions("anonymous");
+            return GetUserUserPredictions("anonymous");
         }
 
         public List<User> GetUsers()
