@@ -28,5 +28,8 @@ namespace SPData.DataModel
         [LoadColumn(6)]
         public float next { get; set; }
 
+        [LoadColumn(6)]
+        public string ticker { get; set; }
+
     }
 }

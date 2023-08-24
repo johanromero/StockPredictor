@@ -9,22 +9,27 @@ namespace SPApiCore.Model
     public class Symbol
     {
 
-        [JsonProperty("symbol")]
+        [JsonProperty("Ticker")]
         public string Ticker { get; set; }
         [JsonProperty("companyName")]
         public string CompanyName { get; set; }
         [JsonProperty("created_utc")]
         public string Date { get; set; }
-        [JsonProperty("open")]
+        [JsonProperty("Open")]
         public double Open { get; set; }
-        [JsonProperty("high")]
+        [JsonProperty("High")]
         public double High { get; set; }
-        [JsonProperty("low")]
+        [JsonProperty("Low")]
         public double Low { get; set; }
-        [JsonProperty("close")]
+        [JsonProperty("Close")]
         public double Close { get; set; }
-        [JsonProperty("volume")]
+        [JsonProperty("Volume")]
         public int Volume { get; set; }
+
+        public Symbol()
+        {
+            Date = DateTime.Now.ToString("f");
+        }
 
     }
 

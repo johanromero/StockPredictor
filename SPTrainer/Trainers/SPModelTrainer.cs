@@ -1,74 +1,192 @@
 ﻿using Microsoft.ML;
+using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 using SPTrainer.Models;
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace SPTrainer
 {
     public static class SPModelTrainer
     {
-        public static void TrainAndSaveModel(MLContext mlContext, string dataPath, string outputModelPath)
+        public static void TrainAndSaveModel(MLContext mlContext, string dataPath, string outputModelPath, string algorithm = "")
         {
             if (File.Exists(outputModelPath))
             {
                 File.Delete(outputModelPath);
             }
-            CreatePredictionModel(mlContext, dataPath, outputModelPath);
+
+            switch (algorithm)
+            {
+                case "LbfgsPoisson":
+                    CreatePredictionModelLbfgsPoisson(mlContext, dataPath, outputModelPath, algorithm);
+                    break;                    
+                case "OnlineGradient":
+                    CreatePredictionOnlineGradient(mlContext, dataPath, outputModelPath, algorithm);
+                    break;
+
+                default:
+                    CreatePredictionModelSDCA(mlContext, dataPath, outputModelPath, algorithm);
+                    break;
+            }
+            
         }
 
-        public static void CreatePredictionModel(MLContext mlContext, string dataPath, string outputModelPath)
+        public static void CreatePredictionModelSDCA(MLContext mlContext, string dataPath, string outputModelPath, string algorithm = "")
         {
-            var trainingDataView = mlContext.Data.LoadFromTextFile<StockData>(path: dataPath, hasHeader: true, separatorChar: ',');
+            var trainingDataView = mlContext.Data.LoadFromTextFile<StockDataInput>(path: dataPath, hasHeader: true, separatorChar: ',');
+            
 
-            var trainer = mlContext.Regression.Trainers.Sdca();
+            var trainer = mlContext.Regression.Trainers.Sdca(labelColumnName: "Close", maximumNumberOfIterations: 20); 
+            var pipeline = mlContext.Transforms.CustomMapping(new
+                                            DateToFloatCustomAction().GetMapping(), contractName: "DateToFloat")
+                                .AppendCacheCheckpoint(mlContext)
+                                .Append(mlContext.Transforms.Concatenate("Features", new[] {"DateFloat", "Volume", "Open", "High","Low" }))
+                                .Append(trainer);
+            
+                      
 
-            var trainingPipeline = mlContext.Transforms.Concatenate("Features", inputColumnNames: new string[] { "open", "high", "low", "close", "volume" })
-                  .Append(mlContext.Transforms.CopyColumns("Label", inputColumnName: "next"))
-                  .Append(trainer);
 
-            // Data process configuration with pipeline data transformations 
-            var dataProcessPipeline = mlContext.Transforms.Text.FeaturizeText("Date_tf", "Date")
-                                      .Append(mlContext.Transforms.CopyColumns("Features", "Date_tf"));
+
+            //var trainingPipeline = mlContext.Transforms.Concatenate("Features",  new[] {  "open", "high", "low", "close" })
+            //    .Append(mlContext.Transforms.CopyColumns("Label", inputColumnName: "close")).Append(trainerSDCA);
+
 
             // Train the model
+            ITransformer model = pipeline.Fit(trainingDataView);
+
+            mlContext.ComponentCatalog.RegisterAssembly(typeof(
+                    DateToFloatCustomAction).Assembly);
+
+            var prediction = model.Transform(trainingDataView);
+            var metrics = mlContext.Regression.Evaluate(prediction, "Close", "Score");
 
 
-            ITransformer model = trainingPipeline.Fit(trainingDataView);
+            Console.WriteLine();
+            Console.WriteLine($"*************************************************");
+            Console.WriteLine($"*       Model quality metrics evaluation         ");
+            Console.WriteLine($"*------------------------------------------------");
+
+            Console.WriteLine($"*       RSquared Score:      {metrics.RSquared:0.##}");
+            Console.WriteLine($"*       Root Mean Squared Error:      {metrics.RootMeanSquaredError:#.##}");
 
             // Save the model for later comsumption from end-user apps
-            using (var file = File.OpenWrite(outputModelPath))
+            using (
+                var file = File.OpenWrite(outputModelPath))
             {
                 mlContext.Model.Save(model, trainingDataView.Schema, file);
             }
-
-
-            StockData dataSample = new StockData()
-            {
-                open = 73.55F,
-                high = 74.17F,
-                low = 73.17F,
-                close = 73.85F,
-                timestamp = "2017-09-27",
-                volume = 18934048
-            };
-            var path = "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneDayPred_model.zip";
-            // Evaluate quality of Model
-            var evalResult = Evaluate(mlContext, dataSample,path, trainingDataView, trainingPipeline);
-
         }
 
-        public static PredictionResult Evaluate(MLContext mlContext, StockData input, string outputModelPath, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
+
+        public static void CreatePredictionModelLbfgsPoisson(MLContext mlContext, string dataPath, string outputModelPath, string algorithm = "")
+        {
+            var trainingDataView = mlContext.Data.LoadFromTextFile<StockDataInput>(path: dataPath, hasHeader: true, separatorChar: ',');
+
+
+            var trainer = mlContext.Regression.Trainers.LbfgsPoissonRegression(labelColumnName: "Close");
+            var pipeline = mlContext.Transforms.CustomMapping(new
+                                            DateToFloatCustomAction().GetMapping(), contractName: "DateToFloat")
+                                .AppendCacheCheckpoint(mlContext)
+                                .Append(mlContext.Transforms.Concatenate("Features", new[] { "DateFloat", "Volume", "Open", "High", "Low" }))
+                                .Append(trainer);
+
+
+
+
+
+            //var trainingPipeline = mlContext.Transforms.Concatenate("Features",  new[] {  "open", "high", "low", "close" })
+            //    .Append(mlContext.Transforms.CopyColumns("Label", inputColumnName: "close")).Append(trainerSDCA);
+
+
+            // Train the model
+            ITransformer model = pipeline.Fit(trainingDataView);
+
+            mlContext.ComponentCatalog.RegisterAssembly(typeof(
+                    DateToFloatCustomAction).Assembly);
+
+            var prediction = model.Transform(trainingDataView);
+            var metrics = mlContext.Regression.Evaluate(prediction, "Close", "Score");
+
+
+            Console.WriteLine();
+            Console.WriteLine($"*************************************************");
+            Console.WriteLine($"*       Model quality metrics evaluation         ");
+            Console.WriteLine($"*------------------------------------------------");
+
+            Console.WriteLine($"*       RSquared Score:      {metrics.RSquared:0.##}");
+            Console.WriteLine($"*       Root Mean Squared Error:      {metrics.RootMeanSquaredError:#.##}");
+
+            // Save the model for later comsumption from end-user apps
+            using (
+                var file = File.OpenWrite(outputModelPath))
+            {
+                mlContext.Model.Save(model, trainingDataView.Schema, file);
+            }
+        }
+
+
+        public static void CreatePredictionOnlineGradient(MLContext mlContext, string dataPath, string outputModelPath, string algorithm = "")
+        {
+            var trainingDataView = mlContext.Data.LoadFromTextFile<StockDataInput>(path: dataPath, hasHeader: true, separatorChar: ',');
+
+
+            var trainer = mlContext.Regression.Trainers.OnlineGradientDescent(labelColumnName: "Close", numberOfIterations: 20);
+            var pipeline = mlContext.Transforms.CustomMapping(new
+                                            DateToFloatCustomAction().GetMapping(), contractName: "DateToFloat")
+                                .AppendCacheCheckpoint(mlContext)
+                                .Append(mlContext.Transforms.Concatenate("Features", new[] { "DateFloat", "Volume", "Open", "High", "Low" }))
+                                .Append(mlContext.Transforms.NormalizeMinMax("Features"))
+                                .Append(trainer);
+
+
+
+
+
+            //var trainingPipeline = mlContext.Transforms.Concatenate("Features",  new[] {  "open", "high", "low", "close" })
+            //    .Append(mlContext.Transforms.CopyColumns("Label", inputColumnName: "close")).Append(trainerSDCA);
+
+
+            // Train the model
+            ITransformer model = pipeline.Fit(trainingDataView);
+
+            mlContext.ComponentCatalog.RegisterAssembly(typeof(
+                    DateToFloatCustomAction).Assembly);
+
+            var prediction = model.Transform(trainingDataView);
+            var metrics = mlContext.Regression.Evaluate(prediction, "Close", "Score");
+
+
+            Console.WriteLine();
+            Console.WriteLine($"*************************************************");
+            Console.WriteLine($"*       Model quality metrics evaluation         ");
+            Console.WriteLine($"*------------------------------------------------");
+
+            Console.WriteLine($"*       RSquared Score:      {metrics.RSquared:0.##}");
+            Console.WriteLine($"*       Root Mean Squared Error:      {metrics.RootMeanSquaredError:#.##}");
+
+            // Save the model for later comsumption from end-user apps
+            using (
+                var file = File.OpenWrite(outputModelPath))
+            {
+                mlContext.Model.Save(model, trainingDataView.Schema, file);
+            }
+        }
+
+
+        public static PredictionResult TestPrediction(MLContext mlContext, StockData input, string outputModelPath)
         {
             Console.WriteLine("Testing Forecast model");
 
             // Read the model that has been previously saved by the method SaveModel
 
             ITransformer trainedModel;
-            DataViewSchema modelSchema;
 
             using (var stream = File.OpenRead(outputModelPath))
             {
-                trainedModel = mlContext.Model.Load(stream, out modelSchema);
+                trainedModel = mlContext.Model.Load(stream, out var modelSchema);
+            
             }
 
             var predictionEngine = mlContext.Model.CreatePredictionEngine<StockData, PredictionResult>(trainedModel);
@@ -78,12 +196,12 @@ namespace SPTrainer
             // Predict the nextperiod/month forecast to the one provided
 
             PredictionResult prediction = predictionEngine.Predict(input);
-            Console.WriteLine($"Product: {input.timestamp}, Forecast Prediction (high): {prediction.Score}");
+            Console.WriteLine($"Date: {input.Date}, Forecast Prediction (high): {prediction.Score}");
             Console.WriteLine("done");
             return prediction;
-
-
            
         }
     }
+
+
 }

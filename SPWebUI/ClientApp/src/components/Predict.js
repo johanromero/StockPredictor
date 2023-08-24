@@ -1,70 +1,121 @@
 import React, { Component } from 'react';
 
+import { PredictDetail } from '../components/PredictDetail';
+import Chart from '../components/Chart'
+
 export class Predict extends Component {
    
 
     constructor(props) {
         super(props);
-        this.state = { symbol: '', value: 0 };
+        this.state = {
+            isError: false,
+            isSubmitting: false,
+            values: {
+                Ticker: "MSFT",
+                Open: 73.55,
+                Close: 73.85,
+                Volume: 18934048,
+                High: 74.17
+            },
+        };
        
     }
 
-    handleSubmit() {
-        fetch('/api/PREDICT')
-            .then(res => {
-                return res.json();
-            })
-            .then(res => {
-                this.setState({
-                    symbol: res.symbol,
-                    value: res.value
-                })
+    handleInputChange = e => this.setState({
+        values: {
+            Ticker: e.target.value, 
+            Open: 73.55,
+            Close: 73.85,
+            Volume: 1893404,
+            High: 74.17 }
+    });
+
+    submitForm = async e => {
+        e.preventDefault();
+        console.log('Log body'+this.state.values);
+        const apiUrl = "https://localhost:44395/api/predictor";
+            this.setState({ isSubmitting: true });
+            const res = await fetch(apiUrl, {
+                method: "POST",
+                body: JSON.stringify(this.state.values),
+                headers: {
+                    "Content-Type": "application/json"
+                }               
             });
+        this.setState({ isSubmitting: false }); 
+        const data = await res.json();
+        const plotData = data && [
+            ["Date", this.state.values.Ticker],
+            [30, data.oneMonth],
+            [180, data.sixMonths],
+            [360, data.oneYear],
+            [360*5, data.FiveYears],
+        ];
+        this.setState({ response: data, plotData: plotData });
+            !data.hasOwnProperty("error")
+                ? this.setState({ message: data.success })
+                    : this.setState({ message: data.error, isError: true });
+        //setTimeout(
+        //    () =>
+        //        this.setState({
+        //            isError: false,
+        //            message: "",
+        //            values: { symbol: "" }
+        //        }),
+        //    1600
+        //);
     }
 
-    predict(e) {
-        return fetch('/api/PREDICT')
-            .then(response => response.json())
-            .then(data => console.log(data)); 
-    }
-
-    handleChange(event) {
-        this.setState({
-            submit: event.target.value
-        });
-    }
-
-   
+    
 
     render() {
+       
         return (
-            <section class="section">
-                <div class="container">
-                    <div class="box">
-                        <div class="columns is-vcentered">
-                            <div class="column is-one-fifth">
-                                <form onSubmit={this.handleSubmit()}  novalidate="novalidate">
-                                    <div class="field">
-                                    <label class="label" for="Symbol">Symbol</label>
-                                    <div class="control">
-                                            <input class="input" value={this.state.symbol} data-val="true" data-val-maxlength="Must be less than 5 characters" data-val-maxlength-max="5" data-val-required="The Symbol field is required." id="symbol" maxlength="5" name="Symbol" type="text" value={this.satate.value} />
-                                     </div>
-                                        <p class="help is-danger"><span class="field-validation-valid" data-valmsg-for="Symbol" data-valmsg-replace="true"></span></p>
+            <section className="section">
+                <div className="container">
+                    <div className="box">
+                        <div className="columns is-vcentered">
+                            <div className="column is-one-fifth">
+                                <form 
+                                    method="post"
+                                    noValidate="novalidate">
+                                    <div className="field">
+                                    <label className="label" htmlFor="Symbol">Symbol</label>
+                                    <div className="control">
+                                            <input
+                                                className="input"
+                                                value={this.state.values.Ticker || ''}
+                                                onChange={this.handleInputChange}
+                                                data-val="true"
+                                                data-val-maxlength="Must be less than 5 characters"
+                                                data-val-maxlength-max="5"
+                                                data-val-required="The Symbol field is required."
+                                                id="symbol"
+                                                maxLength="5"
+                                                name="Symbol"
+                                                type="text" />
+                                         </div>
                                     </div>
-                                    <div class="control">
-                                        <button type="submit" class="button is-primary" id="getTicker">Make Prediction</button>
-                                    </div>
-                                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Fi1H8UbxnlMvUASl2XwYkupmJgLUn7GcT2ICxZ6BgjUcrJbZT6C0GC75ERpoS9bzXNYzD1grpLwj3CsxogHuMGeTMJWo0N_w1SSNAhzIsEikYbVZ6_2-GDbmWoDmRiJiCXpjuJMDtgd2lwLKsQqmyE" />
-                                        </form>
-                                    </div>
-                                    <div class="column is-four-fifths">
-                                    </div>
-                                        </div>
+                                    <div className="control">
+                                        <button type="submit" onClick={this.submitForm}
+                                            className="button is-primary" id="getTicker">Make Prediction</button>
+                                    </div>                                   
+                                </form>
                             </div>
+                            <div className="column is-four-fifths">
+                                {this.state.response ?
+                                    <PredictDetail data={this.state.response} />
+                                    : <div></div>}
+                                    </div>
 
-
-
-                        </div>
+                                </div>
+                                    {this.state.plotData ?
+                                        <Chart 
+                                            data={this.state.plotData} />
+                                        : <div>Loading...</div>}
+                                </div>
+                </div>
             </section>
         );
     }

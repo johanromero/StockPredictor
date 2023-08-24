@@ -18,8 +18,18 @@ namespace SPDataService.Services
             var p = new Prediction();
             var rootLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             
-            p.OneDayPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../SPTrainer/PredictionModels/OneDayPred_model.zip")).Score;
+            p.Ticker = input.Ticker;
 
+            var oneMonthPath = String.Format("../../../../SPTrainer/PredictionModels/{0}/OneMonth.zip", p.Ticker.ToUpper());
+            var sixMonthsPath = String.Format("../../../../SPTrainer/PredictionModels/{0}/SixMonths.zip", p.Ticker.ToUpper());
+            var oneYearPath = String.Format("../../../../SPTrainer/PredictionModels/{0}/OneYear.zip", p.Ticker.ToUpper());
+            var fiveYearsPath = String.Format("../../../../SPTrainer/PredictionModels/{0}/FiveYears.zip", p.Ticker.ToUpper());
+
+
+            p.OneMonth = RunPrediction(input, Path.Combine(rootLocation, oneMonthPath)).Score;
+            p.SixMonths = RunPrediction(input, Path.Combine(rootLocation, sixMonthsPath)).Score;
+            p.OneYear = RunPrediction(input, Path.Combine(rootLocation, oneYearPath)).Score;
+            p.FiveYears = RunPrediction(input, Path.Combine(rootLocation, fiveYearsPath)).Score;
             return p;
         }
 

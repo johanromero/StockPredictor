@@ -15,6 +15,7 @@ namespace SPApiCore
 {
     public class Startup
     {
+        private readonly string  _MyCors ="";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +27,13 @@ namespace SPApiCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+                options.AddPolicy(name: _MyCors, builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader().AllowAnyMethod();
+                })
+            ); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +47,7 @@ namespace SPApiCore
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(_MyCors);
 
             app.UseAuthorization();
 

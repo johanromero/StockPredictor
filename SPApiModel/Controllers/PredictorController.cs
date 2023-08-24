@@ -1,16 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SPTrainer.PredictionModels;
 using Microsoft.Extensions.Logging;
-using SPData.Services;
 using SPApiCore.Model;
-using SPDAO.Models;
 using SPDataService.Services;
 using SPTrainer.Models;
+using System;
 
 namespace SPApiCore.Controllers
 {
@@ -25,22 +19,22 @@ namespace SPApiCore.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpPost]
         public Prediction Get(Symbol ticker)
-        {        
+        {
 
             var stockData = new StockData()
             {
-                timestamp = ticker.Date,
-                open = (float)ticker.Open,
-                high = (float)ticker.High,
-                low = (float)ticker.Low,
-                close = (float)ticker.Close,
-                volume = ticker.Volume
+                Date = DateTime.Now.ToString("MM/dd/yyyy"),
+                Open = (long)ticker.Open,
+                High = (long)ticker.High,
+                Low = (long)ticker.Low,
+                Close = (long)ticker.Close,
+                Volume = ticker.Volume
             };
 
             return PredictionService.RunAllPredictions(stockData);
 
         }
-    }
+    } 
 }
