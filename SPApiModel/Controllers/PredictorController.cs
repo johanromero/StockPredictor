@@ -26,15 +26,11 @@ namespace SPApiCore.Controllers
             var stockData = new StockData()
             {
                 Date = DateTime.Now.ToString("MM/dd/yyyy"),
-                Open = (long)ticker.Open,
-                High = (long)ticker.High,
-                Low = (long)ticker.Low,
-                Close = (long)ticker.Close,
-                Volume = ticker.Volume
+                Ticker = ticker.Ticker
             };
 
             return PredictionService.RunAllPredictions(stockData);
 
         }
-    } 
+    }
 }

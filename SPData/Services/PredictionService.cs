@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.ML;
+using SPTrainer.Models;
+using System;
 using System.IO;
 using System.Reflection;
-using System.Text;
-using Microsoft.ML;
-using SPTrainer.Models;
 
 namespace SPDataService.Services
 {
@@ -17,8 +15,10 @@ namespace SPDataService.Services
         {
             var p = new Prediction();
             var rootLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            
+
             p.Ticker = input.Ticker;
+            p.Date = input.Date;
+
 
             var oneMonthPath = String.Format("../../../../SPTrainer/PredictionModels/{0}/OneMonth.zip", p.Ticker.ToUpper());
             var sixMonthsPath = String.Format("../../../../SPTrainer/PredictionModels/{0}/SixMonths.zip", p.Ticker.ToUpper());

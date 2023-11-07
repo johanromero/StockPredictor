@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Text;
-using Microsoft.ML.Data;
+﻿using Microsoft.ML.Data;
 using Microsoft.ML.Transforms;
+using System;
+using System.Globalization;
 
 namespace SPTrainer.Models
 {
-    public class StockDataInput {
+    public class StockDataInput
+    {
         // Date,Close,Volume,Open,High,Low
         [LoadColumn(0)]
         [ColumnName("Date")]
@@ -29,7 +27,7 @@ namespace SPTrainer.Models
         [LoadColumn(5)]
         public float Low { get; set; }
 
-     
+
 
     }
 
@@ -50,29 +48,29 @@ namespace SPTrainer.Models
 
 
     [CustomMappingFactoryAttribute("DateToFloat")]
-    public  class DateToFloatCustomAction : CustomMappingFactory<StockDataInput,
+    public class DateToFloatCustomAction : CustomMappingFactory<StockDataInput,
     StockData>
     {
         // We define the custom mapping between input and output rows that will
         // be applied by the transformation.
         public static void CustomAction(StockDataInput input, StockData
             output)
-        {  
-            
-                const string DATETIME_FORMAT = "MM/dd/yyyy";
-                output.Close = input.Close;
-                output.High = input.High;
-                output.Low = input.Low;
-                output.Open = input.Open;
-                output.Volume = input.Volume;
-                output.Date = input.Date;
+        {
+
+            const string DATETIME_FORMAT = "MM/dd/yyyy";
+            output.Close = input.Close;
+            output.High = input.High;
+            output.Low = input.Low;
+            output.Open = input.Open;
+            output.Volume = input.Volume;
+            output.Date = input.Date;
 
             if (DateTime.TryParseExact(input.Date,
                                             DATETIME_FORMAT,
                                             CultureInfo.InvariantCulture,
-                                            DateTimeStyles.None, out var result))              
-                output.DateFloat = (float) result.ToFileTime();
-    }
+                                            DateTimeStyles.None, out var result))
+                output.DateFloat = (float)result.ToFileTime();
+        }
 
         public override Action<StockDataInput, StockData> GetMapping()
             => CustomAction;

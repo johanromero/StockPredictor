@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import { PredictDetail } from '../components/PredictDetail';
+import PredictDetail from '../components/PredictDetail';
 import Chart from '../components/Chart'
 
 export class Predict extends Component {
@@ -12,11 +11,7 @@ export class Predict extends Component {
             isError: false,
             isSubmitting: false,
             values: {
-                Ticker: "MSFT",
-                Open: 73.55,
-                Close: 73.85,
-                Volume: 18934048,
-                High: 74.17
+                Ticker: "MSFT"
             },
         };
        
@@ -24,11 +19,8 @@ export class Predict extends Component {
 
     handleInputChange = e => this.setState({
         values: {
-            Ticker: e.target.value, 
-            Open: 73.55,
-            Close: 73.85,
-            Volume: 1893404,
-            High: 74.17 }
+            Ticker: e.target.value
+        }
     });
 
     submitForm = async e => {
@@ -50,7 +42,7 @@ export class Predict extends Component {
             [30, data.oneMonth],
             [180, data.sixMonths],
             [360, data.oneYear],
-            [360*5, data.FiveYears],
+            [360*5, data.fiveYears],
         ];
         this.setState({ response: data, plotData: plotData });
             !data.hasOwnProperty("error")
@@ -70,6 +62,7 @@ export class Predict extends Component {
     
 
     render() {
+
        
         return (
             <section className="section">
@@ -82,20 +75,30 @@ export class Predict extends Component {
                                     noValidate="novalidate">
                                     <div className="field">
                                     <label className="label" htmlFor="Symbol">Symbol</label>
-                                    <div className="control">
-                                            <input
-                                                className="input"
-                                                value={this.state.values.Ticker || ''}
-                                                onChange={this.handleInputChange}
-                                                data-val="true"
-                                                data-val-maxlength="Must be less than 5 characters"
-                                                data-val-maxlength-max="5"
-                                                data-val-required="The Symbol field is required."
-                                                id="symbol"
-                                                maxLength="5"
-                                                name="Symbol"
-                                                type="text" />
-                                         </div>
+                                    {/*<div className="control">*/}
+                                    {/*        <input*/}
+                                    {/*            className="input"*/}
+                                    {/*            value={this.state.values.Ticker || ''}*/}
+                                    {/*            onChange={this.handleInputChange}*/}
+                                    {/*            data-val="true"*/}
+                                    {/*            data-val-maxlength="Must be less than 5 characters"*/}
+                                    {/*            data-val-maxlength-max="5"*/}
+                                    {/*            data-val-required="The Symbol field is required."*/}
+                                    {/*            id="symbol"*/}
+                                    {/*            maxLength="5"*/}
+                                    {/*            name="Symbol"*/}
+                                    {/*            type="text"*/}
+                                    {/*        />*/}
+                                    {/*    </div>*/}
+
+                                        <select id="symbol" name="cars"
+                                            onChange={this.handleInputChange}
+                                        >
+                                            <option value="MSFT">Microsoft</option>
+                                            <option value="AAPL">Apple</option>
+                                            <option value="AMZN">Amazon</option>
+                                        </select>
+
                                     </div>
                                     <div className="control">
                                         <button type="submit" onClick={this.submitForm}

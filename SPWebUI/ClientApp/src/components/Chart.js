@@ -1,16 +1,17 @@
 import { Chart } from "react-google-charts";
-import React, { Component }  from 'react';
+import React from 'react';
 
 export const options = {
-    title: "Stock predictor function",
-    curveType: "function",
+    title: "Stock predictor ",
+    hAxis: { title: "Prediction", titleTextStyle: { color: "#333" } },
+    vAxis: { minValue: 0 },
     legend: { position: "bottom" },
   };
 
 const charts = (prop) => {
     return (
         <Chart
-            chartType="LineChart"
+            chartType="AreaChart"
             data={prop.data}
             width="100%"
             height="400px"
